@@ -4,9 +4,9 @@ This repository uses [Homebrew](https://brew.sh/) to install tools and [GNU Stow
 
 ## Layout
 
-- `Brewfile` lists Homebrew packages and apps.
+- `packages/bundle` lists Homebrew packages and apps.
 - `home/` is a single Stow package. Its contents mirror paths under `$HOME`.
-- `bootstrap.sh` installs the Brewfile and links `home/` into `$HOME`.
+- `bootstrap.sh` installs `packages/bundle` and links `home/` into `$HOME`.
 
 For example, `home/.config/herdr/config.toml` links to `~/.config/herdr/config.toml`.
 

@@ -8,7 +8,7 @@ if ! command -v brew >/dev/null 2>&1; then
   exit 1
 fi
 
-brew bundle --file "$repo_dir/Brewfile"
+brew bundle --file "$repo_dir/packages/bundle"
 
 printf 'Checking links from home/ to %s\n' "$HOME"
 stow --simulate --verbose --no-folding --dir "$repo_dir" --target "$HOME" home
