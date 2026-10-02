@@ -1,21 +1,39 @@
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin", restart_service: :changed
+# Modern, maintained replacement for ls
+brew "eza"
+# Fast, user-friendly file finder
+brew "fd"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
+# Command-line fuzzy finder
+brew "fzf"
 # GitHub command-line tool
 brew "gh"
 # Agent multiplexer that lives in your terminal
 brew "herdr"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Fast recursive text search
+brew "ripgrep"
+# Rust toolchain installer and version manager
+brew "rustup"
+# Cross-shell prompt for astronauts
+brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Unified toolchain and entry point for web development
+brew "vite-plus"
+# Directory navigation based on usage frequency
+brew "zoxide"
 # Display management tool
 cask "betterdisplay"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Replacement for Docker Desktop
+cask "orbstack"
 # Music streaming service
 cask "spotify"
 # Menu bar toolkit with keep-awake, system monitor and volume mixer
