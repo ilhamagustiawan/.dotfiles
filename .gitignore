@@ -1,0 +1,8 @@
+# Pi credentials and generated local state
+/home/.pi/agent/auth.json
+/home/.pi/agent/antigravity-accounts.json
+/home/.pi/agent/models-store.json
+/home/.pi/agent/sessions/
+/home/.pi/agent/bin/
+/home/.pi/agent/install/
+/home/.pi/agent/npm/

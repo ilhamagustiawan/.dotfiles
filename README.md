@@ -34,6 +34,22 @@ stow --delete --verbose --no-folding --dir "$PWD" --target "$HOME" home
 
 Keep passwords, tokens, machine-specific state, and generated files out of this repository.
 
+## Pi
+
+`home/.pi/agent/settings.json` stores the default provider/model and Pi package declarations. Device IDs and changelog state are omitted; credentials, sessions, installed packages, and generated model catalogs stay local and are ignored by Git.
+
+If `~/.pi/agent/settings.json` already exists, back it up before linking:
+
+```sh
+mv ~/.pi/agent/settings.json ~/.pi/agent/settings.json.backup
+stow --simulate --verbose --no-folding --dir "$PWD" --target "$HOME" home
+stow --restow --verbose --no-folding --dir "$PWD" --target "$HOME" home
+```
+
+Pi loads the declared `npm:pi-antigravity` package on startup. Authenticate separately on each machine; authentication files are not managed by Stow.
+
+Codemode is optional. To enable it, add `"defaultTools": ["+codemode"]` to the Pi settings and run `/reload`.
+
 ## Fonts
 
 Ghostty uses Berkeley Mono. Install your licensed Berkeley Mono `.otf` files with Font Book before launching Ghostty. The font files are not stored in this repository.
