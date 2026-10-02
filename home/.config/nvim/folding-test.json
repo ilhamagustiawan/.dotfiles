@@ -1,0 +1,128 @@
+{
+  "meta": {
+    "id": "test-8f3c2a",
+    "created_at": "2026-03-27T12:00:00Z",
+    "purpose": "neovim folding test",
+    "version": 1,
+    "tags": [
+      "fold",
+      "json",
+      "sample",
+      "editor"
+    ]
+  },
+  "users": [
+    {
+      "id": 101,
+      "name": "Mira Stone",
+      "active": true,
+      "roles": [
+        "admin",
+        "editor"
+      ],
+      "preferences": {
+        "theme": "solarized",
+        "font_size": 14,
+        "keymaps": {
+          "save": "<leader>w",
+          "quit": "<leader>q",
+          "search": "/"
+        }
+      }
+    },
+    {
+      "id": 102,
+      "name": "Jon Vale",
+      "active": false,
+      "roles": [
+        "viewer"
+      ],
+      "preferences": {
+        "theme": "light",
+        "font_size": 12,
+        "keymaps": {
+          "save": ":w",
+          "quit": ":q",
+          "search": "?"
+        }
+      }
+    }
+  ],
+  "projects": [
+    {
+      "slug": "atlas",
+      "status": "active",
+      "settings": {
+        "auto_save": true,
+        "lint_on_save": true,
+        "formatters": [
+          "stylua",
+          "prettier",
+          "shfmt"
+        ]
+      },
+      "files": [
+        {
+          "path": "lua/plugins/editor.lua",
+          "size": 4821,
+          "folds": {
+            "imports": true,
+            "functions": true,
+            "tables": true
+          }
+        },
+        {
+          "path": "lua/plugins/lsp.lua",
+          "size": 9132,
+          "folds": {
+            "imports": true,
+            "functions": true,
+            "tables": false
+          }
+        }
+      ]
+    },
+    {
+      "slug": "ember-lake",
+      "status": "archived",
+      "settings": {
+        "auto_save": false,
+        "lint_on_save": false,
+        "formatters": [
+          "jq"
+        ]
+      },
+      "files": [
+        {
+          "path": "tests/fixtures/sample.json",
+          "size": 2048,
+          "folds": {
+            "imports": false,
+            "functions": false,
+            "tables": true
+          }
+        }
+      ]
+    }
+  ],
+  "telemetry": {
+    "enabled": false,
+    "events": [
+      {
+        "name": "buffer_open",
+        "count": 18,
+        "last_seen": "2026-03-26T21:18:04Z"
+      },
+      {
+        "name": "fold_toggle",
+        "count": 42,
+        "last_seen": "2026-03-27T09:11:55Z"
+      },
+      {
+        "name": "format_write",
+        "count": 7,
+        "last_seen": "2026-03-27T11:03:19Z"
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+-- vim.lsp.enable "gdscript"
+-- vim.lsp.config.gdscript = {
+--   cmd = { "gdscript-language-server" },
+--   filetypes = { "gdscript" },
+--   root_dir = function(fname)
+--     return vim.fs.dirname(vim.fs.find({ "project.godot" }, { upward = true, path = fname })[1])
+--   end,
+--   settings = {
+--     gdscript = {
+--       enableSnippets = true,
+--       enableCompletion = true,
+--       enableDiagnostics = true,
+--       enableHover = true,
+--     },
+--   },
+-- }
+-- return
