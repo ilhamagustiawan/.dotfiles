@@ -1,7 +1,6 @@
 alias bunx 'vpx'
 alias c 'clear'
 alias code 'vim'
-alias codex 'pi'
 alias grep 'grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 alias la 'eza -la --icons --git'
 alias ll 'eza -l --icons --git'
