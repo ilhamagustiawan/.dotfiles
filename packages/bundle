@@ -28,13 +28,19 @@ brew "vite-plus"
 brew "zoxide"
 # Display management tool
 cask "betterdisplay"
+# Screen capturing tool
+cask "cleanshot"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Archive manager
+cask "macpacker"
 # Replacement for Docker Desktop
 cask "orbstack"
 # Music streaming service
 cask "spotify"
+# Voice-to-text app
+cask "voiceink"
 # Menu bar toolkit with keep-awake, system monitor and volume mixer
 cask "vorssaint"
