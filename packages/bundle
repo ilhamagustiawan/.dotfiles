@@ -26,6 +26,8 @@ brew "stow"
 brew "vite-plus"
 # Directory navigation based on usage frequency
 brew "zoxide"
+# Terminal interface for Antigravity agents
+cask "antigravity-cli"
 # Display management tool
 cask "betterdisplay"
 # Screen capturing tool

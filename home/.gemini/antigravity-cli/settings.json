@@ -1,0 +1,15 @@
+{
+  "agentMode": "accept-edits",
+  "allowNonWorkspaceAccess": true,
+  "altScreenMode": "always",
+  "artifactReviewPolicy": "agent-decides",
+  "editorMode": "vim",
+  "model": "Gemini 3.8 Flash (High)",
+  "notifications": true,
+  "pickerGrouping": "grouped",
+  "runningLightSpeed": "fast",
+  "toolPermission": "always-proceed",
+  "trustedWorkspaces": [],
+  "verbosity": "low",
+  "vimInsertFirst": true
+}
