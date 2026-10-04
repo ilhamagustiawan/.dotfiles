@@ -36,19 +36,50 @@ Keep passwords, tokens, machine-specific state, and generated files out of this 
 
 ## Pi
 
-`home/.pi/agent/settings.json` stores the default provider/model and Pi package declarations. Device IDs and changelog state are omitted; credentials, sessions, installed packages, and generated model catalogs stay local and are ignored by Git.
+Pi settings (`~/.pi/agent/settings.json`) and Antigravity CLI settings (`~/.gemini/antigravity-cli/settings.json`) stay local and are not managed by Stow. Their corresponding paths under `home/` are excluded from Git. Configure providers, models, and packages separately on each machine.
 
-If `~/.pi/agent/settings.json` already exists, back it up before linking:
+Pi credentials, sessions, installed packages, and generated model catalogs also stay local and are ignored by Git. Install `npm:pi-antigravity` and authenticate separately on each machine if needed.
+
+Codemode is optional. To enable it, add `"defaultTools": ["+codemode"]` to the Pi settings and run `/reload`.
+
+## Agent skills
+
+`home/.agents/skills/productivity/` contains the productivity skills copied from [mattpocock/skills](https://github.com/mattpocock/skills/tree/main/skills/productivity), including their supporting files and MIT license:
+
+- `grill-me`
+- `grilling`
+- `handoff`
+- `teach`
+- `to-questionnaire`
+- `wait-what`
+- `writing-for-agents`
+
+`home/.agents/skills/engineering/` contains these [engineering skills](https://github.com/mattpocock/skills/tree/main/skills/engineering), including their supporting files and the upstream MIT license:
+
+- `code-review`
+- `codebase-design`
+- `diagnosing-bugs`
+- `domain-modeling`
+- `implement`
+- `implement-spec`
+- `pr`
+- `prototype`
+- `research`
+- `retro`
+- `to-spec`
+- `to-tickets`
+- `wayfinder`
+- `wizard`
+
+Upstream names the ticket-planning skill `to-tickets` (plural); no `to-implement` skill was present in the upstream snapshot.
+
+Stow links these into `~/.agents/skills/`, where Pi and other Agent Skills-compatible tools can discover them. After adding the files, rerun Stow and reload Pi:
 
 ```sh
-mv ~/.pi/agent/settings.json ~/.pi/agent/settings.json.backup
-stow --simulate --verbose --no-folding --dir "$PWD" --target "$HOME" home
 stow --restow --verbose --no-folding --dir "$PWD" --target "$HOME" home
 ```
 
-Pi loads the declared `npm:pi-antigravity` package on startup. Authenticate separately on each machine; authentication files are not managed by Stow.
-
-Codemode is optional. To enable it, add `"defaultTools": ["+codemode"]` to the Pi settings and run `/reload`.
+Run `/reload` in Pi to load the skills.
 
 ## Fonts
 
