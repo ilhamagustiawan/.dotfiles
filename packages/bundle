@@ -1,5 +1,11 @@
+tap "abue-ammar/tinycast"
+
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin", restart_service: :changed
+# Memory upgrade for your coding agent
+brew "beads"
+# ACP server that exposes Codex CLI functionality for ACP-compatible clients
+brew "codex-acp"
 # Modern, maintained replacement for ls
 brew "eza"
 # Fast, user-friendly file finder
@@ -12,6 +18,8 @@ brew "fzf"
 brew "gh"
 # Agent multiplexer that lives in your terminal
 brew "herdr"
+# Polyglot runtime manager (asdf rust clone)
+brew "mise"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Fast recursive text search
@@ -22,10 +30,18 @@ brew "rustup"
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Easiest, most secure way to use WireGuard and 2FA
+brew "tailscale"
+# Parser generator tool
+brew "tree-sitter-cli"
 # Unified toolchain and entry point for web development
 brew "vite-plus"
 # Directory navigation based on usage frequency
 brew "zoxide"
+# Command-line interface for 1Password
+cask "1password-cli"
+# Android SDK component
+cask "android-platform-tools"
 # Terminal interface for Antigravity agents
 cask "antigravity-cli"
 # Display management tool
@@ -36,13 +52,24 @@ cask "cleanshot"
 cask "codex"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Client for the Google Drive storage service
+cask "google-drive"
 # Archive manager
 cask "macpacker"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # Replacement for Docker Desktop
 cask "orbstack"
 # Music streaming service
 cask "spotify"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
+# Tiny, fully native launcher, hotkeys, and clipboard history
+cask "abue-ammar/tinycast/tinycast", trusted: true
 # Voice-to-text app
 cask "voiceink"
 # Menu bar toolkit with keep-awake, system monitor and volume mixer
 cask "vorssaint"
+
+# Package manager shims for Node.js
+npm "corepack"
