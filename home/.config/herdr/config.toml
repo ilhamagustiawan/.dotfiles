@@ -754,7 +754,7 @@ scrollback_limit_bytes = 52428800
 [experimental]
 # Allow launching Herdr inside an existing Herdr pane.
 # Default: false.
-allow_nested = true
+allow_nested = false
 
 # Render local Kitty graphics for attached clients. Requires a compatible outer
 # terminal and remains experimental.

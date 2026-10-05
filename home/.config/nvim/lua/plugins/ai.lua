@@ -1,108 +1,131 @@
 return {
   {
-    "zbirenbaum/copilot.lua",
-    enabled = false,
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup {
-        server = {
-          type = "binary",
-        },
-        panel = {
-          enabled = true,
-          auto_refresh = true,
-          keymap = {
-            jump_prev = "[[",
-            jump_next = "]]",
-            accept = "<CR>",
-            refresh = "r",
-            open = false,
-          },
-          layout = {
-            position = "bottom",
-            ratio = 0.4,
-          },
-        },
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          hide_during_completion = true,
-          trigger_on_accept = true,
-          keymap = {
-            accept = false,
-            accept_word = "<Right>",
-            accept_line = "<Down>",
-            next = "<s-right>",
-            prev = "<s-left>",
-            dismiss = "<C-]>",
-          },
-        },
-        nes = {
-          enabled = false,
-          auto_trigger = true,
-          keymap = {
-            accept_and_goto = false,
-            accept = false,
-            dismiss = false,
-          },
-        },
-        telemetry = {
-          telemetryLevel = "off",
-        },
-      }
-      vim.keymap.set("i", "<Tab>", function()
-        if require("copilot.suggestion").is_visible() then
-          require("copilot.suggestion").accept()
-        end
-      end)
-    end,
-  },
-  {
-    "sudo-tee/opencode.nvim",
-    enabled = true,
+    "olimorris/codecompanion.nvim",
     event = "VeryLazy",
+    cmd = { "CodeCompanionChat", "CodeCompanionActions" },
     dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
       "MeanderingProgrammer/render-markdown.nvim",
       "saghen/blink.cmp",
       "folke/snacks.nvim",
+      "j-hui/fidget.nvim",
+    },
+    keys = {
+      { "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle AI chat" },
+      {
+        "<leader>ae",
+        function()
+          require("codecompanion").chat {
+            user_prompt = "Help me edit this code. #{buffer} #{selection}",
+            auto_submit = false,
+          }
+        end,
+        mode = { "n", "x" },
+        desc = "Edit code with Codex chat",
+      },
+      {
+        "<leader>am",
+        function()
+          require("codecompanion").chat {
+            user_prompt = "Suggest a Neovim Ex command for the following task. Explain it without executing it: ",
+            auto_submit = false,
+          }
+        end,
+        desc = "Generate command with Codex chat",
+      },
+      { "<leader>ac", ":CodeCompanionChat Add<cr>", mode = { "n", "x" }, desc = "Add to AI chat" },
+      { "<leader>ap", "<cmd>CodeCompanionActions<cr>", mode = { "n", "x" }, desc = "AI actions" },
+      {
+        "<leader>aug",
+        function()
+          require("codecompanion").chat {
+            user_prompt = "Write a conventional commit message for these changes. Return only the commit message. #{diff}",
+          }
+        end,
+        desc = "Generate commit message with Codex",
+      },
     },
     opts = {
-      ui = {
-        input = {
-          text = {
-            wrap = true,
+      display = {
+        chat = {
+          window = {
+            opts = {
+              number = false,
+              relativenumber = false,
+            },
           },
         },
       },
-      keymap_prefix = "<leader>a",
-      keymap = {
-        editor = {
-          ["<leader>aa"] = { "toggle" },
-          ["<leader>ae"] = { "quick_chat", mode = { "n", "x" } },
-          ["<leader>aug"] = {
-            function()
-              require("opencode.api").quick_chat "Write a conventional commit message #diff"
-            end,
-            desc = "Generate commit message",
-          },
-        },
-        input_window = {
-          ["<c-c>"] = { "close" },
-          ["<esc>"] = { "cancel" },
-          ["<tab>"] = { "switch_mode", mode = { "n" } },
-          ["<c-t>"] = { "cycle_variant", mode = { "n", "i" } },
-          ["<cr>"] = { "submit_input_prompt", { "n" } },
-        },
-        output_window = {
-          ["<c-c>"] = { "close" },
-          ["<esc>"] = { "cancel" },
-          ["<tab>"] = false,
+      adapters = {
+        acp = {
+          codex = function()
+            return require("codecompanion.adapters").extend("codex", {
+              commands = {
+                default = {
+                  "env",
+                  'CODEX_CONFIG={"model":"gpt-6-luna","model_reasoning_effort":"xhigh"}',
+                  "codex-acp",
+                },
+              },
+              defaults = {
+                auth_method = "chat-gpt",
+              },
+            })
+          end,
         },
       },
-      quick_chat = {
-        default_model = "github-copilot/gpt-5-mini",
+      interactions = {
+        chat = {
+          adapter = "codex",
+          opts = {
+            completion_provider = "blink",
+          },
+          slash_commands = {
+            file = {
+              opts = { provider = "snacks" },
+            },
+          },
+          keymaps = {
+            send = { modes = { i = { "<C-CR>", "<C-s>" } } },
+            completion = { modes = { i = "<C-x>" } },
+            close = { modes = { n = "<C-c>", i = "<C-c>" } },
+            stop = { modes = { n = "<Esc>" } },
+          },
+        },
       },
     },
+    config = function(_, opts)
+      require("codecompanion").setup(opts)
+
+      local handles = {}
+      vim.api.nvim_create_autocmd("User", {
+        group = vim.api.nvim_create_augroup("CodeCompanionFidget", { clear = true }),
+        pattern = { "CodeCompanionRequestStarted", "CodeCompanionRequestFinished" },
+        callback = function(event)
+          local data = event.data or {}
+          local id = data.id
+          if not id then
+            return
+          end
+
+          if event.match == "CodeCompanionRequestStarted" then
+            if handles[id] then
+              handles[id]:finish()
+            end
+            local adapter = data.adapter or {}
+            handles[id] = require("fidget.progress").handle.create {
+              title = "Thinking...",
+              message = adapter.model,
+              lsp_client = { name = "CodeCompanion (" .. (adapter.formatted_name or "Codex") .. ")" },
+            }
+          elseif handles[id] then
+            handles[id]:report { message = data.status or "Finished" }
+            handles[id]:finish()
+            handles[id] = nil
+          end
+        end,
+      })
+    end,
   },
 }

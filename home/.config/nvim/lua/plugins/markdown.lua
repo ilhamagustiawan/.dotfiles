@@ -1,13 +1,13 @@
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "Avante", "chat-dialog", "copilot-chat", "opencode_output" },
+    ft = { "Avante", "chat-dialog", "copilot-chat", "opencode_output", "codecompanion" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter", -- Mandatory
       "nvim-tree/nvim-web-devicons", -- Optional but recommended
     },
     opts = {
-      file_types = { "Avante", "chat-dialog", "copilot-chat", "opencode_output" },
+      file_types = { "Avante", "chat-dialog", "copilot-chat", "opencode_output", "codecompanion" },
       anti_conceal = { enabled = false },
       heading = {
         enabled = true,

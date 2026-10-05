@@ -1,0 +1,22 @@
+# Preserve Stow's built-in ignores: a package-local list replaces them.
+RCS
+.+,v
+CVS
+\.\#.+
+\.cvsignore
+\.svn
+_darcs
+\.hg
+\.git
+\.gitignore
+\.gitmodules
+.+~
+\#.*\#
+^/README.*
+^/LICENSE.*
+^/COPYING
+
+# Machine-local agent settings, credentials, and generated state.
+^/\.gemini/antigravity-cli/settings\.json$
+^/\.pi/agent/(settings\.json|auth\.json|antigravity-accounts\.json|models-store\.json)$
+^/\.pi/agent/(sessions|bin|install|npm)(/.*)?$

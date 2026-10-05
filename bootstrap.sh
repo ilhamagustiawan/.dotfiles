@@ -11,7 +11,7 @@ fi
 brew bundle --file "$repo_dir/packages/bundle"
 
 printf 'Checking links from home/ to %s\n' "$HOME"
-stow --simulate --verbose --no-folding --dir "$repo_dir" --target "$HOME" home
+stow --simulate --restow --verbose --no-folding --dir "$repo_dir" --target "$HOME" home
 
 printf 'Linking home/ to %s\n' "$HOME"
 stow --restow --verbose --no-folding --dir "$repo_dir" --target "$HOME" home

@@ -23,7 +23,7 @@ The script checks all links before creating them. If an existing file occupies a
 To preview links without installing software:
 
 ```sh
-stow --simulate --verbose --no-folding --dir "$PWD" --target "$HOME" home
+stow --simulate --restow --verbose --no-folding --dir "$PWD" --target "$HOME" home
 ```
 
 To remove the links:
@@ -36,9 +36,9 @@ Keep passwords, tokens, machine-specific state, and generated files out of this 
 
 ## Pi
 
-Pi settings (`~/.pi/agent/settings.json`) and Antigravity CLI settings (`~/.gemini/antigravity-cli/settings.json`) stay local and are not managed by Stow. Their corresponding paths under `home/` are excluded from Git. Configure providers, models, and packages separately on each machine.
+Pi settings (`~/.pi/agent/settings.json`) and Antigravity CLI settings (`~/.gemini/antigravity-cli/settings.json`) stay local and are not managed by Stow. Their corresponding paths under `home/` are excluded from Git and from Stow by `home/.stow-local-ignore`. Configure providers, models, and packages separately on each machine.
 
-Pi credentials, sessions, installed packages, and generated model catalogs also stay local and are ignored by Git. Install `npm:pi-antigravity` and authenticate separately on each machine if needed.
+Pi credentials, sessions, installed packages, and generated model catalogs also stay local and are ignored by Git and Stow. Install `npm:pi-antigravity` and authenticate separately on each machine if needed.
 
 Codemode is optional. To enable it, add `"defaultTools": ["+codemode"]` to the Pi settings and run `/reload`.
 

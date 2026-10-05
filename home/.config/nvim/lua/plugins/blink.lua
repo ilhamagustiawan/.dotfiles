@@ -30,11 +30,6 @@ return {
       ["<C-y>"] = { "show", "show_documentation", "hide_documentation" },
       ["<C-n>"] = { "select_next", "show", "show_documentation", "fallback_to_mappings" },
       ["<Tab>"] = {
-        function()
-          if require("copilot.suggestion").is_visible() then
-            return require("copilot.suggestion").accept()
-          end
-        end,
         function(cmp)
           if cmp.snippet_active() then
             return cmp.accept()

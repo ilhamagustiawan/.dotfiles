@@ -14,9 +14,9 @@ return {
 
         -- fujiWhite = "#fbf1c7",
         -- oldWhite = "#ebdbb2",
-        dragonBlack3 = "#0a0a0a", -- match Atom terminal bg
-        dragonBlack0 = "#070707", -- darker panels/floats
-        dragonBlack4 = "#1e2023", -- cursorline/lighter bg
+        dragonBlack3 = "#161818", -- darker gruvbox hard-inspired charcoal
+        dragonBlack0 = "#101212", -- darker panels/floats
+        dragonBlack4 = "#222423", -- cursorline/lighter bg
       },
       theme = {
         all = {
@@ -30,7 +30,6 @@ return {
       local theme = colors.theme
 
       return {
-        -- https://github.com/rebelot/kanagawa.nvim?tab=readme-ov-file#transparent-floating-windows
         NormalFloat = { bg = "NONE" },
         FloatBorder = { bg = "NONE" },
         FloatTitle = { bg = "NONE" },
