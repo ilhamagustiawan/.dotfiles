@@ -54,6 +54,8 @@ cask "codex"
 cask "ghostty"
 # Client for the Google Drive storage service
 cask "google-drive"
+# Custom Discord client
+cask "legcord"
 # Archive manager
 cask "macpacker"
 # Knowledge base that works on top of a local folder of plain text Markdown files
