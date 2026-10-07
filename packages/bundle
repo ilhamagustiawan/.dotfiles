@@ -46,6 +46,8 @@ cask "android-platform-tools"
 cask "antigravity-cli"
 # Display management tool
 cask "betterdisplay"
+# Send any size file between devices
+cask "blip"
 # Screen capturing tool
 cask "cleanshot"
 # OpenAI's coding agent that runs in your terminal
