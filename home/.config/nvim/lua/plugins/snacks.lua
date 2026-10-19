@@ -37,27 +37,12 @@ return {
       },
       actions = {
         opencode_send = function(picker)
-          local selected = picker:selected { fallback = true }
-          if selected and #selected > 0 then
-            local files = {}
-            for _, item in ipairs(selected) do
-              if item.file then
-                table.insert(files, item.file)
-              end
-            end
-            picker:close()
-
-            require("opencode.core").open {
-              new_session = false,
-              focus = "input",
-              start_insert = true,
-            }
-
-            local context = require "opencode.context"
-            for _, file in ipairs(files) do
-              context.add_file(file)
-            end
-          end
+          local items = vim.tbl_map(function(item)
+            return item.file and require("opencode").format { path = item.file, from = item.pos, to = item.end_pos }
+              or item.text
+          end, picker:selected { fallback = true })
+          picker:close()
+          require("opencode").ask(table.concat(items, ", ") .. " ")
         end,
       },
       win = {
