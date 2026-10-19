@@ -22,6 +22,7 @@ return {
   {
     "NeogitOrg/neogit",
     lazy = true,
+    cmd = { "Neogit" },
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
       "esmuellert/codediff.nvim", -- optional
@@ -42,7 +43,7 @@ return {
     keys = {
       {
         "<leader>vn",
-        "<cmd>Neogit<CR>",
+        "<cmd>Neogit kind=vsplit<CR>",
         { silent = false },
       },
     },

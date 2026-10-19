@@ -46,6 +46,8 @@ cask "android-platform-tools"
 cask "antigravity-cli"
 # Display management tool
 cask "betterdisplay"
+# 3D creation suite
+cask "blender"
 # Send any size file between devices
 cask "blip"
 # Screen capturing tool
