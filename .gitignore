@@ -2,6 +2,9 @@
 /home/.pi/agent/settings.json
 /home/.gemini/antigravity-cli/settings.json
 
+# OpenCode service credentials
+/home/.config/opencode/service.json
+
 # Pi credentials and generated local state
 /home/.pi/agent/auth.json
 /home/.pi/agent/antigravity-accounts.json

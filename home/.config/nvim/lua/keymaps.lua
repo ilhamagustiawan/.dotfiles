@@ -55,7 +55,7 @@ vim.api.nvim_set_keymap("", "<C-a>", "<Nop>", { noremap = false })
 -- Clipboard/Yank/Paste
 
 -- Yank to system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>yy", [["+y]], { desc = "Yank to clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank entire line to clipboard" })
 
 -- Paste from system clipboard
@@ -129,3 +129,16 @@ end, { desc = "[Y]ank selection with [A]bsolute path" })
 vim.keymap.set("v", "<leader>yr", function()
   yank.yank_visual_with_path(yank.get_buffer_cwd_relative(), "relative")
 end, { desc = "[Y]ank selection with [R]elative path" })
+
+vim.keymap.set("x", "<leader>an", function()
+  -- Hand the selection to Herdr Annotate through a short-lived local file.
+  vim.cmd 'normal! "zy'
+  local runtime_dir = vim.env.XDG_RUNTIME_DIR
+  if not runtime_dir or runtime_dir == "" then
+    runtime_dir = vim.uv.os_tmpdir()
+  end
+  local handoff_dir = runtime_dir .. "/herdr-annotate-" .. vim.uv.getuid()
+  vim.fn.mkdir(handoff_dir, "p", "0700")
+  vim.fn.writefile(vim.split(vim.fn.getreg "z", "\n"), handoff_dir .. "/selection")
+  vim.fn.jobstart({ "herdr", "plugin", "action", "invoke", "annotate.capture" }, { detach = true })
+end, { desc = "Annotate selection in Herdr" })

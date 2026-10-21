@@ -44,6 +44,10 @@ The configuration uses Command-Space for the launcher, Right Command as Hyper, a
 
 Grant Accessibility permission manually for clipboard paste and window actions. Configure launch at login separately. Review settings diffs for personal paths or prompts before committing, and keep credentials and generated state out of Git.
 
+## OpenCode
+
+OpenCode CLI settings (`~/.config/opencode/cli.json`) are managed by Stow. The service credentials in `~/.config/opencode/service.json` stay local and are excluded from Git and Stow.
+
 ## Pi
 
 Pi settings (`~/.pi/agent/settings.json`) and Antigravity CLI settings (`~/.gemini/antigravity-cli/settings.json`) stay local and are not managed by Stow. Their corresponding paths under `home/` are excluded from Git and from Stow by `home/.stow-local-ignore`. Configure providers, models, and packages separately on each machine.

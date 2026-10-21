@@ -20,8 +20,8 @@ brew "gh"
 brew "herdr"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
+# Neovim development build (latest HEAD instead of stable)
+brew "neovim", args: ["HEAD"]
 # Fast recursive text search
 brew "ripgrep"
 # Rust toolchain installer and version manager
