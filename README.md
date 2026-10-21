@@ -34,6 +34,16 @@ stow --delete --verbose --no-folding --dir "$PWD" --target "$HOME" home
 
 Keep passwords, tokens, machine-specific state, and generated files out of this repository.
 
+## Tinycast
+
+Tinycast is installed by `packages/bundle`. Its settings live in `home/.config/tinycast/settings.json`, based on [dmmulroy's configuration](https://github.com/dmmulroy/.dotfiles/tree/main/home/.config/tinycast).
+
+After linking the dotfiles with Stow, open Tinycast and enable **Settings → Backup → Settings File**. Choose **Import**, not Replace, when it detects the existing file. Tinycast uses UserDefaults until this feature is enabled; afterward, GUI changes update the JSON file and file edits apply live.
+
+The configuration uses Command-Space for the launcher, Right Command as Hyper, and Control-Option-H/J/K/L for window management. Hyper-1 through Hyper-5 open Zen, Ghostty, Spotify, TickTick, and Obsidian; Hyper-V opens clipboard history. Emoji search uses the `em` alias. Avoid assigning the same shortcuts to Spotlight or another launcher. Clipboard history is retained forever; AI, file search in `~/Downloads`, notes, and navigation are enabled, while custom commands are disabled.
+
+Grant Accessibility permission manually for clipboard paste and window actions. Configure launch at login separately. Review settings diffs for personal paths or prompts before committing, and keep credentials and generated state out of Git.
+
 ## Pi
 
 Pi settings (`~/.pi/agent/settings.json`) and Antigravity CLI settings (`~/.gemini/antigravity-cli/settings.json`) stay local and are not managed by Stow. Their corresponding paths under `home/` are excluded from Git and from Stow by `home/.stow-local-ignore`. Configure providers, models, and packages separately on each machine.
