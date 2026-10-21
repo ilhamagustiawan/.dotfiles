@@ -1,4 +1,5 @@
 tap "abue-ammar/tinycast"
+tap "plannotator/tap"
 
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin", restart_service: :changed
@@ -22,6 +23,8 @@ brew "herdr"
 brew "mise"
 # Neovim development build (latest HEAD instead of stable)
 brew "neovim", args: ["HEAD"]
+# Terminal UI for reviewing and annotating coding agent plans
+brew "plannotator/tap/plannotator-tui"
 # Fast recursive text search
 brew "ripgrep"
 # Rust toolchain installer and version manager
