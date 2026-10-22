@@ -48,6 +48,8 @@ Grant Accessibility permission manually for clipboard paste and window actions. 
 
 OpenCode CLI settings (`~/.config/opencode/cli.json`) are managed by Stow. The service credentials in `~/.config/opencode/service.json` stay local and are excluded from Git and Stow.
 
+Plannotator reviews open in Safari via `PLANNOTATOR_BROWSER` in the Fish configuration, without changing the system-wide default browser. Restart the agent from a new Fish shell after changing this setting.
+
 ## Pi
 
 Pi settings (`~/.pi/agent/settings.json`) and Antigravity CLI settings (`~/.gemini/antigravity-cli/settings.json`) stay local and are not managed by Stow. Their corresponding paths under `home/` are excluded from Git and from Stow by `home/.stow-local-ignore`. Configure providers, models, and packages separately on each machine.
@@ -58,17 +60,19 @@ Codemode is optional. To enable it, add `"defaultTools": ["+codemode"]` to the P
 
 ## Agent skills
 
-`home/.agents/skills/productivity/` contains the productivity skills copied from [mattpocock/skills](https://github.com/mattpocock/skills/tree/main/skills/productivity), including their supporting files and MIT license:
+`home/.agents/skills/productivity/` contains productivity skills originally copied from [mattpocock/skills](https://github.com/mattpocock/skills/tree/main/skills/productivity), with additions and updates described below. The original supporting files and MIT license are retained:
 
 - `grill-me`
 - `grilling`
+- `bro` (renamed from `wait-what`, preserving its behavior)
 - `handoff`
+- `herdr`
+- `show-me`
 - `teach`
 - `to-questionnaire`
-- `wait-what`
 - `writing-for-agents`
 
-`home/.agents/skills/engineering/` contains these [engineering skills](https://github.com/mattpocock/skills/tree/main/skills/engineering), including their supporting files and the upstream MIT license:
+`home/.agents/skills/engineering/` contains these [engineering skills](https://github.com/mattpocock/skills/tree/main/skills/engineering), plus the adapted `write-discoverable-code` addition. The original supporting files and upstream MIT license are retained:
 
 - `code-review`
 - `codebase-design`
@@ -80,14 +84,18 @@ Codemode is optional. To enable it, add `"defaultTools": ["+codemode"]` to the P
 - `prototype`
 - `research`
 - `retro`
+- `setup-engineering-skills`
 - `to-spec`
 - `to-tickets`
 - `wayfinder`
 - `wizard`
+- `write-discoverable-code`
+
+`diagnosing-bugs`, `handoff`, and `writing-for-agents` now match the pinned dmmulroy snapshot. `herdr` is copied from it; `show-me` and `write-discoverable-code` are adapted. See [source and licensing notes](home/.agents/skills/SOURCES.md) for the exact commit, local changes, and license boundaries. `pr` and `show-me` share one visual-guidance reference.
 
 Upstream names the ticket-planning skill `to-tickets` (plural); no `to-implement` skill was present in the upstream snapshot.
 
-Stow links these into `~/.agents/skills/`, where Pi and other Agent Skills-compatible tools can discover them. After adding the files, rerun Stow and reload Pi:
+Stow links these into `~/.agents/skills/`, where Pi and other Agent Skills-compatible tools can discover them. Before deployment, resolve the existing standalone `~/.agents/skills/herdr` directory so it does not compete with `productivity/herdr`; do not overwrite it automatically. After the rename, check that only `bro`, not the old `wait-what`, is discoverable. Preview deployment with `stow --simulate` before rerunning Stow and reloading Pi:
 
 ```sh
 stow --restow --verbose --no-folding --dir "$PWD" --target "$HOME" home
