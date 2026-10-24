@@ -1,0 +1,2 @@
+# Allow Vite+ Node.js shims time to initialize on a cold start (milliseconds).
+command_timeout = 5000
