@@ -365,36 +365,36 @@ resize_mode = "prefix+shift+r"
 # specify width and height in cells or percentages.
 
 # Herdr Annotate: terminal comments, document review, and agent feedback.
-[[keys.command]]
-key = "prefix+a"
-type = "plugin_action"
-command = "annotate.capture"
-description = "Annotate selected terminal text"
-
-[[keys.command]]
-key = "prefix+shift+a"
-type = "plugin_action"
-command = "annotate.copy-context"
-description = "Copy annotations as agent context"
-
-# prefix+m remains pane zoom.
-[[keys.command]]
-key = "prefix+shift+m"
-type = "plugin_action"
-command = "annotate.manage"
-description = "Manage annotations"
-
-[[keys.command]]
-key = "prefix+o"
-type = "plugin_action"
-command = "annotate.open"
-description = "Review documents in the current folder"
-
-[[keys.command]]
-key = "prefix+shift+o"
-type = "plugin_action"
-command = "annotate.last"
-description = "Review the agent's last reply"
+# [[keys.command]]
+# key = "prefix+a"
+# type = "plugin_action"
+# command = "annotate.capture"
+# description = "Annotate selected terminal text"
+#
+# [[keys.command]]
+# key = "prefix+shift+a"
+# type = "plugin_action"
+# command = "annotate.copy-context"
+# description = "Copy annotations as agent context"
+#
+# # prefix+m remains pane zoom.
+# [[keys.command]]
+# key = "prefix+shift+m"
+# type = "plugin_action"
+# command = "annotate.manage"
+# description = "Manage annotations"
+#
+# [[keys.command]]
+# key = "prefix+o"
+# type = "plugin_action"
+# command = "annotate.open"
+# description = "Review documents in the current folder"
+#
+# [[keys.command]]
+# key = "prefix+shift+o"
+# type = "plugin_action"
+# command = "annotate.last"
+# description = "Review the agent's last reply"
 
 # Legacy indexed shortcuts are parsed for compatibility. Prefer switch_tab,
 # switch_workspace, and focus_agent in new configurations.
@@ -577,6 +577,10 @@ status_indicators = "symbols"
 # { token = "workspace", fg = "#89b4fa", bold = true, dim = false }.
 # Default: [["state_icon", "workspace", "tab"], ["agent"]].
 # rows = [["state_icon", "workspace", "tab"], ["agent"]]
+rows = [
+  ["state_icon", "agent", "state_text"],
+  ["workspace", "tab"],
+]
 
 # Complete Agent-row overrides keyed by strict canonical Agent ID. Agents
 # without an override use ui.sidebar.agents.rows.
@@ -604,7 +608,7 @@ status_indicators = "symbols"
 # Popup delivery: "off", in-app "herdr", outer-terminal "terminal", or direct
 # OS "system" notifications.
 # Default: "off".
-delivery = "system"
+delivery = "herdr"
 
 # Delay before finished or needs-input Agent notifications. Herdr sends only if
 # the pane remains in that state. Valid range: 0-3600 seconds.
