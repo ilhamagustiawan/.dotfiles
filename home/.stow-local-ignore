@@ -21,3 +21,4 @@ _darcs
 ^/\.gemini/antigravity-cli/settings\.json$
 ^/\.pi/agent/(settings\.json|auth\.json|antigravity-accounts\.json|models-store\.json)$
 ^/\.pi/agent/(sessions|bin|install|npm)(/.*)?$
+^/\.config/herdr/\..+\.gpui-lock$

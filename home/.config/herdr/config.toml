@@ -529,10 +529,7 @@ prompt_new_workspace_name = true
 # Hide the tab row when the workspace has exactly one tab.
 # Default: false.
 hide_tab_bar_when_single_tab = true
-
-# Desktop tab-row placement: "top" or "bottom".
-# Default: "top".
-tab_bar_position = "bottom"
+tab_bar_position = "top"
 
 # Ordered right-aligned tab-bar entries. Supported types are zoom, hostname,
 # datetime, text, and command; see the configuration guide for entry fields.

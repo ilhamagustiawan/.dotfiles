@@ -13,3 +13,6 @@
 /home/.pi/agent/bin/
 /home/.pi/agent/install/
 /home/.pi/agent/npm/
+
+# Herdr UI lock files created beside linked configs
+*.gpui-lock

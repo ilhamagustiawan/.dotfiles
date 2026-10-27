@@ -1,4 +1,5 @@
 tap "abue-ammar/tinycast"
+tap "penso/tap"
 
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin", restart_service: :changed
@@ -58,6 +59,8 @@ cask "codex"
 cask "ghostty"
 # Client for the Google Drive storage service
 cask "google-drive"
+# Native GUI client for an existing local Herdr daemon
+cask "penso/tap/herdr-gpui"
 # Custom Discord client
 cask "legcord"
 # Archive manager

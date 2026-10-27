@@ -1,0 +1,59 @@
+# Herdr UI overrides. Saved changes reload automatically.
+# Unset keys inherit config-gpui.toml; tables merge key by key.
+
+# New installs start with the roomy rounded sidebar. Remove this line for
+# the managed default, or pick another layout listed in config-gpui.toml.
+layout = "orca"
+remove_merged_worktrees = true
+agents_placement = "nested"
+status_icons = "orca"
+theme = "Deep"
+show_network_quality = true
+confirm_close_pane = false
+tab_layout = "underline"
+edge_rail = true
+show_sidebar_search = true
+show_repository_icons = true
+show_device_icons = true
+show_agents_header = true
+show_agents = true
+show_gpu_load = true
+confirm_close_workspace = false
+show_sidebar_gpu_load = true
+
+[updates]
+channel = "beta"
+
+[backdrop]
+opacity = 1.0
+
+[sidebar]
+activity_bar = true
+select = "group"
+device_footer = "always"
+family = "Berkeley Mono"
+automations = true
+host_gap = 48.0
+row_padding = 16.0
+indent = 48.0
+
+[tabs]
+family = "Berkeley Mono"
+
+[terminal]
+family = "Berkeley Mono"
+size = 13.0
+
+[ui]
+family = "Berkeley Mono"
+
+[cloud]
+agents = []
+
+[features]
+sidebar_hover_menu = true
+acp_chats = true
+
+[chat]
+layout = "timeline"
+glide = true
