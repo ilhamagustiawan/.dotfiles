@@ -44,7 +44,7 @@ Plannotator reviews open in Safari via `PLANNOTATOR_BROWSER` in the Fish configu
 
 ## Tinycast
 
-Settings live in `home/.config/tinycast/settings.json`, based on [dmmulroy's configuration](https://github.com/dmmulroy/.dotfiles/tree/main/home/.config/tinycast). After linking, enable **Settings → Backup → Settings File** and choose **Import**, not Replace. From then on, GUI changes update the JSON file and file edits apply live.
+Settings live in `home/.config/tinycast/settings.json`. After linking, enable **Settings → Backup → Settings File** and choose **Import**, not Replace. From then on, GUI changes update the JSON file and file edits apply live.
 
 Command-Space opens the launcher and Right Command is Hyper. Hyper-1 through Hyper-5 open Zen, Ghostty, Spotify, TickTick, and Obsidian; Hyper-V opens clipboard history; Control-Option-H/J/K/L manage windows. Emoji search uses the `em` alias. Keep these shortcuts free in Spotlight and other launchers.
 
@@ -57,7 +57,7 @@ Stow links `home/.agents/skills/` into `~/.agents/skills/`, where Pi and other A
 - `productivity/`: `bro` (renamed from `wait-what`), `grill-me`, `grilling`, `handoff`, `herdr`, `show-me`, `teach`, `to-questionnaire`, `writing-for-agents`.
 - `engineering/`: `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `implement`, `implement-spec`, `pr`, `prototype`, `research`, `retro`, `setup-engineering-skills`, `to-spec`, `to-tickets`, `wayfinder`, `wizard`, `write-discoverable-code`.
 
-Most come from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT, license retained). `diagnosing-bugs`, `handoff`, `writing-for-agents`, and `herdr` follow a pinned dmmulroy snapshot; `show-me` and `write-discoverable-code` are adapted. [SOURCES.md](home/.agents/skills/SOURCES.md) has the commits, local changes, and license details.
+Most come from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT, license retained). `diagnosing-bugs`, `handoff`, `writing-for-agents`, and `herdr` follow another pinned snapshot; `show-me` and `write-discoverable-code` are adapted. [SOURCES.md](home/.agents/skills/SOURCES.md) has the commits, local changes, and license details.
 
 ## Fonts
 
