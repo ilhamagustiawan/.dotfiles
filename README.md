@@ -1,108 +1,64 @@
 # Dotfiles
 
-This repository uses [Homebrew](https://brew.sh/) to install tools and [GNU Stow](https://www.gnu.org/software/stow/) to link configuration files into your home directory.
-
-## Layout
+[Homebrew](https://brew.sh/) installs tools and [GNU Stow](https://www.gnu.org/software/stow/) links configuration into `$HOME`.
 
 - `packages/bundle` lists Homebrew packages and apps.
-- `home/` is a single Stow package. Its contents mirror paths under `$HOME`.
-- `bootstrap.sh` installs `packages/bundle` and links `home/` into `$HOME`.
+- `home/` is one Stow package that mirrors `$HOME`. For example, `home/.config/herdr/config.toml` links to `~/.config/herdr/config.toml`.
+- `bootstrap.sh` installs the bundle and links `home/`.
 
-For example, `home/.config/herdr/config.toml` links to `~/.config/herdr/config.toml`.
+Keep passwords, tokens, machine-specific state, and generated files out of this repository.
 
 ## Install
 
-Install Homebrew first if it is missing, then run:
+Install Homebrew, then run:
 
 ```sh
 ./bootstrap.sh
 ```
 
-The script checks all links before creating them. If an existing file occupies a target path, it stops and reports the conflict. Move that file into the matching `home/` path, or back it up yourself, then rerun the script. Existing files are never adopted or overwritten automatically.
+Stow never overwrites existing files. If a regular file sits at a target path, the script stops; move that file into the matching `home/` path and rerun. Apps that save settings can replace a link with a regular file, so this also catches config drift.
 
-To preview links without installing software:
+Preview or remove the links:
 
 ```sh
 stow --simulate --restow --verbose --no-folding --dir "$PWD" --target "$HOME" home
-```
-
-To remove the links:
-
-```sh
 stow --delete --verbose --no-folding --dir "$PWD" --target "$HOME" home
 ```
 
-Keep passwords, tokens, machine-specific state, and generated files out of this repository.
+## Local-only files
 
-## Tinycast
+These are excluded from Git and Stow by `.gitignore` and `home/.stow-local-ignore`, so set them up on each machine:
 
-Tinycast is installed by `packages/bundle`. Its settings live in `home/.config/tinycast/settings.json`, based on [dmmulroy's configuration](https://github.com/dmmulroy/.dotfiles/tree/main/home/.config/tinycast).
+- `~/.config/opencode/service.json`: OpenCode service credentials.
+- `~/.pi/agent/settings.json` and `~/.gemini/antigravity-cli/settings.json`: Pi and Antigravity CLI settings.
+- Pi credentials, sessions, installed packages, and generated model catalogs. Install `npm:pi-antigravity` and authenticate if needed. For Codemode, add `"defaultTools": ["+codemode"]` to the Pi settings and run `/reload`.
+- `*.gpui-lock`: lock files Herdr UI creates beside linked configs.
 
-After linking the dotfiles with Stow, open Tinycast and enable **Settings → Backup → Settings File**. Choose **Import**, not Replace, when it detects the existing file. Tinycast uses UserDefaults until this feature is enabled; afterward, GUI changes update the JSON file and file edits apply live.
+## Herdr UI
 
-The configuration uses Command-Space for the launcher, Right Command as Hyper, and Control-Option-H/J/K/L for window management. Hyper-1 through Hyper-5 open Zen, Ghostty, Spotify, TickTick, and Obsidian; Hyper-V opens clipboard history. Emoji search uses the `em` alias. Avoid assigning the same shortcuts to Spotlight or another launcher. Clipboard history is retained forever; AI, file search in `~/Downloads`, notes, and navigation are enabled, while custom commands are disabled.
-
-Grant Accessibility permission manually for clipboard paste and window actions. Configure launch at login separately. Review settings diffs for personal paths or prompts before committing, and keep credentials and generated state out of Git.
+Settings changed in the app are saved to `home/.config/herdr/config-gpui.local.toml`. The app rewrites `~/.config/herdr/config-gpui.toml` with its defaults on startup, so that file is not tracked.
 
 ## OpenCode
 
-OpenCode CLI settings (`~/.config/opencode/cli.json`) are managed by Stow. The service credentials in `~/.config/opencode/service.json` stay local and are excluded from Git and Stow.
+Plannotator reviews open in Safari via `PLANNOTATOR_BROWSER` in the Fish configuration, without changing the default browser. Restart the agent from a new Fish shell after changing it.
 
-Plannotator reviews open in Safari via `PLANNOTATOR_BROWSER` in the Fish configuration, without changing the system-wide default browser. Restart the agent from a new Fish shell after changing this setting.
+## Tinycast
 
-## Pi
+Settings live in `home/.config/tinycast/settings.json`, based on [dmmulroy's configuration](https://github.com/dmmulroy/.dotfiles/tree/main/home/.config/tinycast). After linking, enable **Settings → Backup → Settings File** and choose **Import**, not Replace. From then on, GUI changes update the JSON file and file edits apply live.
 
-Pi settings (`~/.pi/agent/settings.json`) and Antigravity CLI settings (`~/.gemini/antigravity-cli/settings.json`) stay local and are not managed by Stow. Their corresponding paths under `home/` are excluded from Git and from Stow by `home/.stow-local-ignore`. Configure providers, models, and packages separately on each machine.
+Command-Space opens the launcher and Right Command is Hyper. Hyper-1 through Hyper-5 open Zen, Ghostty, Spotify, TickTick, and Obsidian; Hyper-V opens clipboard history; Control-Option-H/J/K/L manage windows. Emoji search uses the `em` alias. Keep these shortcuts free in Spotlight and other launchers.
 
-Pi credentials, sessions, installed packages, and generated model catalogs also stay local and are ignored by Git and Stow. Install `npm:pi-antigravity` and authenticate separately on each machine if needed.
-
-Codemode is optional. To enable it, add `"defaultTools": ["+codemode"]` to the Pi settings and run `/reload`.
+Grant Accessibility permission for paste and window actions, and set launch at login yourself. Review settings diffs for personal paths or prompts before committing.
 
 ## Agent skills
 
-`home/.agents/skills/productivity/` contains productivity skills originally copied from [mattpocock/skills](https://github.com/mattpocock/skills/tree/main/skills/productivity), with additions and updates described below. The original supporting files and MIT license are retained:
+Stow links `home/.agents/skills/` into `~/.agents/skills/`, where Pi and other Agent Skills tools find them. Run `/reload` in Pi after changes.
 
-- `grill-me`
-- `grilling`
-- `bro` (renamed from `wait-what`, preserving its behavior)
-- `handoff`
-- `herdr`
-- `show-me`
-- `teach`
-- `to-questionnaire`
-- `writing-for-agents`
+- `productivity/`: `bro` (renamed from `wait-what`), `grill-me`, `grilling`, `handoff`, `herdr`, `show-me`, `teach`, `to-questionnaire`, `writing-for-agents`.
+- `engineering/`: `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `implement`, `implement-spec`, `pr`, `prototype`, `research`, `retro`, `setup-engineering-skills`, `to-spec`, `to-tickets`, `wayfinder`, `wizard`, `write-discoverable-code`.
 
-`home/.agents/skills/engineering/` contains these [engineering skills](https://github.com/mattpocock/skills/tree/main/skills/engineering), plus the adapted `write-discoverable-code` addition. The original supporting files and upstream MIT license are retained:
-
-- `code-review`
-- `codebase-design`
-- `diagnosing-bugs`
-- `domain-modeling`
-- `implement`
-- `implement-spec`
-- `pr`
-- `prototype`
-- `research`
-- `retro`
-- `setup-engineering-skills`
-- `to-spec`
-- `to-tickets`
-- `wayfinder`
-- `wizard`
-- `write-discoverable-code`
-
-`diagnosing-bugs`, `handoff`, and `writing-for-agents` now match the pinned dmmulroy snapshot. `herdr` is copied from it; `show-me` and `write-discoverable-code` are adapted. See [source and licensing notes](home/.agents/skills/SOURCES.md) for the exact commit, local changes, and license boundaries. `pr` and `show-me` share one visual-guidance reference.
-
-Upstream names the ticket-planning skill `to-tickets` (plural); no `to-implement` skill was present in the upstream snapshot.
-
-Stow links these into `~/.agents/skills/`, where Pi and other Agent Skills-compatible tools can discover them. Before deployment, resolve the existing standalone `~/.agents/skills/herdr` directory so it does not compete with `productivity/herdr`; do not overwrite it automatically. After the rename, check that only `bro`, not the old `wait-what`, is discoverable. Preview deployment with `stow --simulate` before rerunning Stow and reloading Pi:
-
-```sh
-stow --restow --verbose --no-folding --dir "$PWD" --target "$HOME" home
-```
-
-Run `/reload` in Pi to load the skills.
+Most come from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT, license retained). `diagnosing-bugs`, `handoff`, `writing-for-agents`, and `herdr` follow a pinned dmmulroy snapshot; `show-me` and `write-discoverable-code` are adapted. [SOURCES.md](home/.agents/skills/SOURCES.md) has the commits, local changes, and license details.
 
 ## Fonts
 
-Ghostty uses Berkeley Mono. Install your licensed Berkeley Mono `.otf` files with Font Book before launching Ghostty. The font files are not stored in this repository.
+Ghostty and Herdr UI use Berkeley Mono. Install your licensed `.otf` files with Font Book; they are not stored here.

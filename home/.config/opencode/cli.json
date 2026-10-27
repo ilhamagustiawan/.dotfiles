@@ -1,11 +1,14 @@
 {
   "$schema": "https://opencode.ai/v2/cli.json",
   "theme": {
-    "name": "gruvbox"
+    "name": "opencode"
   },
   "session": {
     "markdown": "rendered",
-    "verbosity": "low"
+    "verbosity": "low",
+    "tps": true,
+    "new_location": "launch",
+    "permissions": "autoaccept"
   },
   "attention": {
     "notifications": true,
@@ -14,5 +17,10 @@
   "experimental": {
     "todo": true
   },
-  "plugins": ["./herdr-opencode"],
+  "plugins": [
+    "./herdr-opencode"
+  ],
+  "terminal": {
+    "copy": "select"
+  },
 }
