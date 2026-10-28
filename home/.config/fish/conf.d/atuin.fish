@@ -1,3 +1,4 @@
 if status is-interactive
-    atuin init fish | source
+    atuin hex init fish | source
+    atuin init fish --disable-up-arrow | source
 end
