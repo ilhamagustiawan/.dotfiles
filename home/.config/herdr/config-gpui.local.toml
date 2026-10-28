@@ -33,19 +33,19 @@ select = "group"
 device_footer = "always"
 family = "Berkeley Mono"
 automations = true
-host_gap = 48.0
-row_padding = 16.0
-indent = 48.0
 
 [tabs]
 family = "Berkeley Mono"
+fallback = ["Symbols Nerd Font Mono"]
 
 [terminal]
 family = "Berkeley Mono"
 size = 13.0
+fallback = ["Symbols Nerd Font Mono"]
 
 [ui]
 family = "Berkeley Mono"
+fallback = ["Symbols Nerd Font Mono"]
 
 [cloud]
 agents = []

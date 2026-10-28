@@ -55,6 +55,8 @@ cask "blip"
 cask "cleanshot"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
+# Nerd Font symbols only, for icon fallback
+cask "font-symbols-only-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Client for the Google Drive storage service
