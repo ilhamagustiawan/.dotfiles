@@ -5,6 +5,8 @@ tap "penso/tap"
 brew "atuin", restart_service: :changed
 # Memory upgrade for your coding agent
 brew "beads"
+# Proxy server exposing AI CLIs as OpenAI/Gemini/Claude-compatible APIs
+brew "cliproxyapi", restart_service: :changed
 # ACP server that exposes Codex CLI functionality for ACP-compatible clients
 brew "codex-acp"
 # Modern, maintained replacement for ls
