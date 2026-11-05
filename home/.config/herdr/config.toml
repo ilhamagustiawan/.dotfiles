@@ -364,6 +364,16 @@ resize_mode = "prefix+shift+r"
 # and `plugin_action` for an installed plugin action. Popup commands may also
 # specify width and height in cells or percentages.
 
+# Split right with the new pane taking 30% of the width. The ratio is the
+# share kept by the original (left) pane.
+[[keys.command]]
+key = "prefix+%"
+type = "shell"
+# Custom commands get HERDR_ACTIVE_PANE_ID (not HERDR_PANE_ID), so --current
+# doesn't work here.
+command = '"${HERDR_BIN_PATH:-herdr}" pane split "$HERDR_ACTIVE_PANE_ID" --direction right --ratio 0.7 --focus'
+description = "Split right (30% width)"
+
 # Herdr Annotate: terminal comments, document review, and agent feedback.
 # [[keys.command]]
 # key = "prefix+a"
@@ -504,31 +514,7 @@ confirm_close = true
 # Ask for a name before interactively creating a workspace.
 # Default: false.
 prompt_new_workspace_name = true
-
-# Draw borders around split panes.
-# Default: true.
-# pane_borders = true
-
-# Draw borders along the outside edge of the pane area. Disable this and pane
-# gaps for tmux-style internal splitters without an outside frame.
-# Default: true.
-# pane_outer_borders = true
-
-# Draw interactive scrollbars beside panes. Disable to reclaim their column and
-# keep scrollbars out of terminal-native selections.
-# Default: true.
-# pane_scrollbars = true
-
-# Visually separate split panes instead of sharing divider borders.
-# Default: true.
-# pane_gaps = true
-
-# Show detected Agent labels in pane borders when no manual label is set.
-# Default: false.
-
-# Hide the tab row when the workspace has exactly one tab.
-# Default: false.
-hide_tab_bar_when_single_tab = true
+hide_tab_bar_when_single_tab = false
 tab_bar_position = "top"
 
 # Ordered right-aligned tab-bar entries. Supported types are zoom, hostname,

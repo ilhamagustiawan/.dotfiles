@@ -10,7 +10,7 @@ status_icons = "orca"
 theme = "Deep"
 show_network_quality = true
 confirm_close_pane = false
-tab_layout = "underline"
+tab_layout = "outline"
 edge_rail = true
 show_sidebar_search = true
 show_repository_icons = true
@@ -20,6 +20,7 @@ show_agents = true
 show_gpu_load = true
 confirm_close_workspace = false
 show_sidebar_gpu_load = true
+focus_follows_mouse = false
 
 [updates]
 channel = "beta"
