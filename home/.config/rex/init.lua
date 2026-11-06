@@ -5,10 +5,10 @@ rex.bind("ctrl+f>ctrl+f", "pane.send_key", { key = "ctrl+f" })
 
 -- Client, sessions, tabs
 rex.bind("ctrl+f>shift+s", "client.settings")
-rex.bind("ctrl+f>w", "session.switch")
+rex.bind("ctrl+f>w", "session_nav", { action = "session.switch" })
 rex.bind("ctrl+f>r", "client.config.reload")
-rex.bind("ctrl+f>ctrl+p", "session.previous")
-rex.bind("ctrl+f>ctrl+n", "session.next")
+rex.bind("ctrl+f>ctrl+p", "session_nav", { action = "session.previous" })
+rex.bind("ctrl+f>ctrl+n", "session_nav", { action = "session.next" })
 rex.bind("ctrl+f>,", "client.tab.rename")
 rex.bind("ctrl+f>shift+x", "client.tab.close")
 
@@ -55,10 +55,10 @@ rex.bind("ctrl+f>m", "pane.zoom")
 -- Navigation: Herdr defaults (commented out in config.toml, so active there)
 
 -- Workspaces map to sessions
-rex.bind("ctrl+f>shift+n", "session.new")
+rex.bind("ctrl+f>shift+n", "session_nav", { action = "session.new" })
 rex.bind("ctrl+f>shift+w", "session.rename")
 rex.bind("ctrl+f>shift+d", "session.close")
-rex.bind("ctrl+f>g", "session.switch")
+rex.bind("ctrl+f>g", "session_nav", { action = "session.switch" })
 
 -- Tabs: c new, n/p cycle, 1-9 jump
 rex.bind("ctrl+f>c", "client.tab.new")
@@ -93,3 +93,9 @@ rex.bind("resize/right", "pane.resize", { direction = "right" })
 -- Copy mode: until Rex ships one, browse the pane's scrollback in nvim
 require("copy_mode")
 rex.bind("ctrl+f>[", "copy_mode")
+
+-- tmux last-pane, last-window, last-session. l and L stay on hjkl.
+require("last_focus")
+rex.bind("ctrl+f>;", "last_pane")
+rex.bind("ctrl+f>o", "last_tab")
+rex.bind("ctrl+f>ctrl+shift+l", "last_session")
