@@ -89,3 +89,7 @@ rex.bind("resize/left", "pane.resize", { direction = "left" })
 rex.bind("resize/down", "pane.resize", { direction = "down" })
 rex.bind("resize/up", "pane.resize", { direction = "up" })
 rex.bind("resize/right", "pane.resize", { direction = "right" })
+
+-- Copy mode: until Rex ships one, browse the pane's scrollback in nvim
+require("copy_mode")
+rex.bind("ctrl+f>[", "copy_mode")
