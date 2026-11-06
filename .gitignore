@@ -1,6 +1,5 @@
 # Machine-local agent settings
 /home/.pi/agent/settings.json
-/home/.gemini/antigravity-cli/settings.json
 
 # OpenCode service credentials
 /home/.config/opencode/service.json
