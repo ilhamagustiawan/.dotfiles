@@ -114,4 +114,89 @@ M.yank_visual_with_path = function(path, label)
   print("Yanked " .. label .. " with lines " .. line_range)
 end
 
+---Format diagnostics, most severe first.
+---Example: `ERROR 13 [ts] Cannot find name 'save'. (2304)`
+---@param diagnostics vim.Diagnostic[]
+---@return string[]
+M.format_diagnostics = function(diagnostics)
+  table.sort(diagnostics, function(a, b)
+    if a.severity ~= b.severity then
+      return a.severity < b.severity
+    end
+    if a.lnum ~= b.lnum then
+      return a.lnum < b.lnum
+    end
+    return a.col < b.col
+  end)
+
+  local lines = {}
+  for _, d in ipairs(diagnostics) do
+    -- Source falls back to namespace name (linter / LSP client)
+    local source = d.source or vim.diagnostic.get_namespace(d.namespace).name
+    local prefix = string.format("%-5s %d ", vim.diagnostic.severity[d.severity], d.lnum + 1)
+    if source then
+      prefix = prefix .. "[" .. source .. "] "
+    end
+
+    -- Multi-line messages: continuation lines aligned under the first
+    local message = vim.split(vim.trim(d.message), "\n")
+    if d.code then
+      message[#message] = message[#message] .. " (" .. tostring(d.code) .. ")"
+    end
+    local indent = string.rep(" ", #prefix)
+    for i, text in ipairs(message) do
+      table.insert(lines, (i == 1 and prefix or indent) .. text)
+    end
+  end
+  return lines
+end
+
+---Yank path, code and diagnostics of cursor line (normal) or selection (visual).
+---@param path string|nil
+---@param label string
+M.yank_diagnostics = function(path, label)
+  if not path then
+    return
+  end
+
+  local mode = vim.fn.mode()
+  local is_visual = mode == "v" or mode == "V"
+  local start_line, end_line
+  if is_visual then
+    local bounds = M.get_visual_bounds()
+    start_line, end_line = bounds.start_line, bounds.end_line
+  else
+    start_line = vim.fn.line "."
+    end_line = start_line
+  end
+
+  -- Header and fenced code; fence language from extension (e.g. tsx)
+  local line_range = M.format_line_range(start_line, end_line)
+  local fence_lang = vim.fn.expand "%:e"
+  if fence_lang == "" then
+    fence_lang = vim.bo.filetype
+  end
+  local result = { path .. ":" .. line_range, "```" .. fence_lang }
+  vim.list_extend(result, vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false))
+  table.insert(result, "```")
+
+  -- Diagnostics within range (lnum is 0-based); section omitted when none
+  local diagnostics = vim.tbl_filter(function(d)
+    return d.lnum + 1 >= start_line and d.lnum + 1 <= end_line
+  end, vim.diagnostic.get(0))
+  if #diagnostics > 0 then
+    table.insert(result, "Diagnostics:")
+    vim.list_extend(result, M.format_diagnostics(diagnostics))
+  end
+
+  vim.fn.setreg("+", table.concat(result, "\n"))
+
+  if is_visual then
+    M.simulate_yank_highlight()
+    M.exit_visual_mode()
+  end
+
+  print("Yanked " .. label .. " with lines " .. line_range .. " and " .. #diagnostics .. " diagnostics")
+end
+
 return M

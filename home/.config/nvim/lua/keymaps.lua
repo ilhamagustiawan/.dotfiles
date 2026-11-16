@@ -129,3 +129,7 @@ end, { desc = "[Y]ank selection with [A]bsolute path" })
 vim.keymap.set("v", "<leader>yr", function()
   yank.yank_visual_with_path(yank.get_buffer_cwd_relative(), "relative")
 end, { desc = "[Y]ank selection with [R]elative path" })
+
+vim.keymap.set({ "n", "v" }, "<leader>ye", function()
+  yank.yank_diagnostics(yank.get_buffer_cwd_relative(), "relative")
+end, { desc = "[Y]ank code with [E]rror diagnostics" })
