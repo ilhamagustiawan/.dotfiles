@@ -59,13 +59,13 @@
         "alias": null,
         "showInLauncher": true
       },
-      "com.mitchellh.ghostty": {
-        "shortcut": "hyper+2",
+      "com.spotify.client": {
+        "shortcut": "hyper+3",
         "alias": null,
         "showInLauncher": true
       },
-      "com.spotify.client": {
-        "shortcut": "hyper+3",
+      "com.superlogical.rex": {
+        "shortcut": "hyper+2",
         "alias": null,
         "showInLauncher": true
       },
