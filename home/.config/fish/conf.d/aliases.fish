@@ -1,4 +1,5 @@
 alias bunx 'vpx'
+alias cat 'bat'
 alias c 'clear'
 alias code 'vim'
 alias grep 'grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
