@@ -5,7 +5,7 @@ rex.bind("ctrl+f>ctrl+f", "pane.send_key", { key = "ctrl+f" })
 
 -- Client, sessions, tabs
 rex.bind("ctrl+f>shift+s", "client.settings")
-rex.bind("ctrl+f>w", "session_nav", { action = "session.switch" })
+rex.bind("ctrl+f>w", "pane.go_to")
 rex.bind("ctrl+f>r", "client.config.reload")
 rex.bind("ctrl+f>ctrl+p", "session_nav", { action = "session.previous" })
 rex.bind("ctrl+f>ctrl+n", "session_nav", { action = "session.next" })
@@ -50,13 +50,13 @@ rex.action{
 }
 
 rex.bind("ctrl+f>x", "kill_pane")
-rex.bind("ctrl+f>m", "pane.zoom")
+rex.bind("ctrl+f>z", "pane.zoom")
 
 -- Navigation: Herdr defaults (commented out in config.toml, so active there)
 
 -- Workspaces map to sessions
 rex.bind("ctrl+f>shift+n", "session_nav", { action = "session.new" })
-rex.bind("ctrl+f>shift+w", "session.rename")
+rex.bind("ctrl+f>shift+4", "session.rename")
 rex.bind("ctrl+f>shift+d", "session.close")
 rex.bind("ctrl+f>g", "session_nav", { action = "session.switch" })
 
