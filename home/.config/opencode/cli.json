@@ -50,6 +50,6 @@
     "acceleration": true
   },
   "debug": {
-    "devtools": true
+    "devtools": false
   },
 }
