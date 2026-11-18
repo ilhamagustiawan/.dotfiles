@@ -1,26 +1,55 @@
 {
   "$schema": "https://opencode.ai/v2/cli.json",
   "theme": {
-    "name": "opencode"
+    "name": "opencode2",
+    "mode": "dark"
   },
   "session": {
     "markdown": "rendered",
     "verbosity": "low",
     "tps": true,
     "new_location": "launch",
-    "permissions": "autoaccept"
+    "permissions": "autoaccept",
+    "image_preview": true,
+    "scrollbar": false,
+    "sidebar": "auto",
+    "submit_scroll": "bottom",
+    "thinking": "show",
+    "grouping": "auto"
   },
   "attention": {
     "notifications": true,
     "sound": true
   },
-  "experimental": {
-    "todo": true
+  "keybinds": {
+    "leader": "ctrl+b",
+    "session.tab.next": ["ctrl+tab", "alt+down", "<leader>n"],
+    "session.tab.previous": ["ctrl+shift+tab", "alt+up", "<leader>p"],
+    "session.new": "<leader>c",
+    "session.compact": "none"
   },
-  "plugins": [
-    "./herdr-opencode"
-  ],
+  "experimental": {
+    "todo": true,
+    "new-designs": true,
+    "client-mcp": true
+  },
   "terminal": {
     "copy": "select"
+  },
+  "tabs": {
+    "layout": "vertical",
+    "scope": "cwd",
+    "mode": "auto",
+    "indicators": "status"
+  },
+  "diffs": {
+    "view": "auto",
+    "single": true
+  },
+  "scroll": {
+    "acceleration": true
+  },
+  "debug": {
+    "devtools": true
   },
 }
